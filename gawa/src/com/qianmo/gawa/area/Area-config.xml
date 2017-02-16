@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.area">
+
+	<typeAlias alias="Area" type="com.qianmo.gawa.area.Area" />
+	
+	<resultMap id="AreaResult" class="Area">
+		<result property="area_id" column="area_id" />
+		<result property="org_id" column="org_id" />
+		<result property="area_code" column="area_code" />
+		<result property="area_name" column="area_name" />
+		<result property="area_address" column="area_address" />
+		<result property="area_longitude" column="area_longitude" />
+		<result property="area_latitude" column="area_latitude" />
+		<result property="area_sevice_type" column="area_sevice_type" />
+		<result property="business_nature" column="business_nature" />
+		<result property="law_owner_name" column="law_owner_name" />
+		<result property="owner_id_type" column="owner_id_type" />
+		<result property="owner_id_no" column="owner_id_no" />
+		<result property="phone_no" column="phone_no" />
+		<result property="start_time" column="start_time" />
+		<result property="end_time" column="end_time" />
+		<result property="access_type" column="access_type" />
+		<result property="net_provider" column="net_provider" />
+		<result property="account_ip" column="account_ip" />
+		<result property="organization_code" column="organization_code" />
+		<result property="state" column="state" />
+		
+	</resultMap>
+
+	<select id="findAreaByPage"  parameterClass="java.util.Map" resultClass="Area">
+		SELECT 
+			*
+		FROM 
+			gawa_area limit #offset# ,#rows#
+		
+	</select>
+	<select id="findAreaCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_area 
+		
+	</select>
+	<select id="findAreaOnlineCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_area where state=1
+		
+	</select>
+	
+	<select id="findAreaById" parameterClass="Integer" resultClass="Area">
+		SELECT 
+			*
+		FROM 
+			gawa_area area
+		WHERE 
+		 	area.area_id=#id#
+	</select>
+	<select id="findAreaByAreacode" parameterClass="String" resultClass="Area">
+		SELECT 
+			*
+		FROM 
+			gawa_area area
+		WHERE 
+		 	area.area_code like concat('%',#areacode#,'%') or
+		 	area_name like concat('%',#areacode#,'%') or
+		 	area_address like concat('%',#areacode#,'%')
+	</select>
+	
+		<insert id="addArea" parameterClass="Area">
+		INSERT INTO gawa_area (
+			org_id,
+			area_code,
+			area_name,
+			area_address,
+			area_longitude,
+			area_latitude,
+			
+			state	
+		) VALUES(
+			#org_id#,
+			#area_code#,
+			#area_name#,
+			#area_address#,
+			#area_longitude#,
+			#area_latitude#,
+			
+			#state#
+		) 
+	</insert>
+		
+	<update id="updateAreaById" parameterClass="Area">
+		update gawa_area
+		set area_name = #area_name#,area_address=#area_address#,state = #state#
+			where area_id = #area_id#
+	</update>
+	<update id="updateAreastateById" parameterClass="Area">
+		update gawa_area
+		set state = #state#
+			where area_id = #area_id#
+	</update>
+	<delete id="deleteArea" parameterClass="Long">
+		delete from gawa_area where area_id = #area_id#
+	</delete>
+
+
+</sqlMap>

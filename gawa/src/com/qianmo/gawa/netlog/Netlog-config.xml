@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.netlog">
+
+	<typeAlias alias="Netlog" type="com.qianmo.gawa.netlog.Netlog" />
+	
+	<resultMap id="NetlogResult" class="Netlog">
+
+		<result property="log_id"                            column="log_id"                           />
+		<result property="area_id"                           column="area_id"                          />
+		<result property="allap_id"                          column="allap_id"                         />
+		<result property="session_id"                        column="session_id"                       />
+		<result property="create_time"                       column="create_time"                      />
+		<result property="auth_area_code"                    column="auth_area_code"                   />
+		<result property="protocol_type"                     column="protocol_type"                    />
+		<result property="ip_lan"                            column="ip_lan"                          />
+		<result property="ip_port_lan"                       column="ip_port_lan"                      />
+		<result property="ip4_wan"                           column="ip4_wan"                          />
+		<result property="ip6_wan"                           column="ip6_wan"                          />
+		<result property="ip4_port_start_wan"                column="ip4_port_start_wan"               />
+		<result property="ip4_port_end_wan"                  column="ip4_port_end_wan"                 />
+		<result property="ip6_port_start_wan"                column="ip6_port_start_wan"               />
+		<result property="ip6_port_end_wan"                  column="ip6_port_end_wan"                 />
+		<result property="ip4_target_wan"                    column="ip4_target_wan"                   />
+		<result property="ip6_target_wan"                    column="ip6_target_wan"                   />
+		<result property="ip4_target_port_wan"               column="ip4_target_port_wan"              />
+		<result property="ip6_target_port_wan"               column="ip6_target_port_wan"              />
+		<result property="user_mac"                          column="user_mac"                         />
+		<result property="ap_code"                           column="ap_code"                          />
+		<result property="ap_mac"                            column="ap_mac"                           />
+		<result property="ap_longitude"                      column="ap_longitude"                        />
+		<result property="ap_latitude"                       column="ap_latitude"                      />
+
+		
+	</resultMap>
+
+	<select id="findNetlogByPage"  parameterClass="java.util.Map" resultClass="Netlog">
+		SELECT 
+			*
+		FROM 
+			gawa_wan_log_record ORDER BY log_id DESC limit #offset# ,#rows#
+		
+	</select>
+	<select id="findNetlogCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_wan_log_record 
+		
+	</select>
+	
+
+	<select id="findNetlogById" parameterClass="Integer" resultClass="Netlog">
+		SELECT 
+			*
+		FROM 
+			gawa_wan_log_record 
+		WHERE 
+		 	log_id=#id#
+	</select>
+	
+	<select id="findNetlogCountByAreacode"  parameterClass="String"  resultClass="Integer">
+		select count(*) from 
+			gawa_wan_log_record 
+		WHERE 
+		 	auth_area_code=#area_code#
+		 	
+	</select>
+	<select id="findNetlogByAreacode" parameterClass="Map" resultClass="Netlog">
+		SELECT 
+			*
+		FROM 
+			gawa_wan_log_record 
+		WHERE 
+		 	auth_area_code=#area_code#
+		 	ORDER BY log_id DESC
+		 	limit #offset# ,#rows#
+	</select>
+	
+	<select id="findNetlogCountByDate"  parameterClass="Map"  resultClass="Integer">
+		select count(*) from 
+			gawa_wan_log_record 
+		WHERE 
+		 	<![CDATA[
+		 	create_time >= #date1# AND
+		 	create_time <= #date2#
+			 ]]>
+			 <isNotEmpty prepend="and" property="area_code">
+	             <![CDATA[ 
+	             auth_area_code=#area_code# 
+	             ]]>
+	         </isNotEmpty>
+		 	
+	</select>
+	<select id="findNetlogByDate" parameterClass="Map" resultClass="Netlog">
+		SELECT 
+			*
+		FROM 
+			gawa_wan_log_record 
+		WHERE 
+		 <![CDATA[
+		 	create_time >= #date1# AND
+		 	create_time <= #date2#
+		 ]]>
+		 <isNotEmpty prepend="and" property="area_code">
+             <![CDATA[ 
+             auth_area_code=#area_code# 
+             ]]>
+         </isNotEmpty>
+         ORDER BY log_id DESC
+         limit #offset# ,#rows#
+	</select>
+	
+		<insert id="addNetlog" parameterClass="Netlog">
+		INSERT INTO gawa_wan_log_record (
+			log_id,
+			area_id,
+			allap_id,
+			session_id,
+			create_time,
+			auth_area_code,
+			protocol_type,
+			ip_lan,
+			ip_port_lan,
+			ip4_wan,
+			ip6_wan,
+			ip4_port_start_wan,
+			ip4_port_end_wan,
+			ip6_port_start_wan,
+			ip6_port_end_wan,
+			ip4_target_wan,
+			ip6_target_wan,
+			ip4_target_port_wan,
+			ip6_target_port_wan,
+			user_mac,
+			ap_code,
+			ap_mac,
+			ap_longitude,
+			ap_latitude           
+
+		) VALUES(
+			#log_id#,
+			#area_id#,
+			#allap_id#,
+			#session_id#,
+			#create_time#,
+			#auth_area_code#,
+			#protocol_type#,
+			#ip_lan#,
+			#ip_port_lan#,
+			#ip4_wan#,
+			#ip6_wan#,
+			#ip4_port_start_wan#,
+			#ip4_port_end_wan#,
+			#ip6_port_start_wan#,
+			#ip6_port_end_wan#,
+			#ip4_target_wan#,
+			#ip6_target_wan#,
+			#ip4_target_port_wan#,
+			#ip6_target_port_wan#,
+			#user_mac#,
+			#ap_code#,
+			#ap_mac#,
+			#ap_longitude#,
+			#ap_latitude#
+ 
+		) 
+	</insert>
+		
+	<update id="updateNetlogById" parameterClass="Netlog">
+		update gawa_wan_log_record
+		set ap_longitude = #ap_longitude#,ap_latitude=#ap_latitude#
+			where log_id = #log_id#
+	</update>
+	<delete id="deleteNetlog" parameterClass="Long">
+		delete from gawa_wan_log_record where log_id = #log_id#
+	</delete>
+
+	<delete id="deleteNetlogByTime" parameterClass="Long">
+		delete from gawa_wan_log_record where 
+		<![CDATA[
+		create_time < #create_time#
+		]]>
+	</delete>
+
+</sqlMap>

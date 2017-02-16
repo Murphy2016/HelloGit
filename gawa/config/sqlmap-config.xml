@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<!-- 系统管理模块 -->
+<!-- 	<sqlMap resource="com/qianmo/jxbg/sys/bean/Sys-config.xml"/> -->
+	<sqlMap resource="com/qianmo/gawa/login/LoginUser-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/login/TestUser-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/area/Area-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/ap/Ap-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/maintain/Maintain-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/netlog/Netlog-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/notice/Notice-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/onoffline/Onoffline-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/org/Org-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/statistic/Statistic-config.xml"/>
+	<sqlMap resource="com/qianmo/gawa/operlog/Operlog-config.xml"/>
+		
+
+</sqlMapConfig>

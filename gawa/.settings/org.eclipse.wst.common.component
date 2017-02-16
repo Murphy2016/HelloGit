@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="gawa">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes/config" source-path="/config"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/p6spydriver"/>
+        <property name="context-root" value="gawa"/>
+        <property name="java-output-path" value="/gawa/build/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.org">
+
+	<typeAlias alias="Org" type="com.qianmo.gawa.org.Org" />
+	
+	<resultMap id="OrgResult" class="Org">
+		<result property="org_id"                         column="org_id"                     />
+		<result property="name1"                          column="name1"                       />
+		<result property="code1"                          column="code1"                       />
+		<result property="address"                        column="address"                    />
+		<result property="contactor"                      column="contactor"                  />
+		<result property="contactor_tel"                  column="contactor_tel"              />
+		<result property="contactor_mail"                 column="contactor_mail"             />
+
+		
+	</resultMap>
+
+	<select id="findOrgById" parameterClass="Integer" resultClass="Org">
+		SELECT 
+			*
+		FROM 
+			gawa_organization 
+		WHERE 
+		 	org_id=#id#
+	</select>
+	
+	<select id="findOrgByPage"  parameterClass="java.util.Map" resultClass="Org">
+		SELECT 
+			*
+		FROM 
+			gawa_organization limit #offset# ,#rows#
+		
+	</select>
+	<select id="findOrgCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_organization 
+		
+	</select>
+	<select id="findOrgBySearch" parameterClass="String" resultClass="Org">
+		SELECT 
+			*
+		FROM 
+			gawa_organization 
+		WHERE 
+			name1 like concat('%',#search#,'%') or
+		 	code1 like concat('%',#search#,'%') or 
+		 	address like concat('%',#search#,'%') or 
+		 	contactor like concat('%',#search#,'%') 
+		 	
+	</select>
+	
+		<insert id="addOrg" parameterClass="Org">
+		INSERT INTO gawa_organization (
+			org_id,
+			name1,
+			code1,
+			address,
+			contactor,
+			contactor_tel,
+			contactor_mail           
+
+		) VALUES(
+			#org_id#,        
+			#name1#,          
+			#code1#,          
+			#address#,       
+			#contactor#,     
+			#contactor_tel#, 
+			#contactor_mail# 
+ 
+		) 
+	</insert>
+		
+	<update id="updateOrgById" parameterClass="Org">
+		update gawa_organization
+		set name1 = #name1#,code1=#code1#,address=#address#,contactor=#contactor#,
+		contactor_tel=#contactor_tel#,contactor_mail=#contactor_mail# 
+			where org_id = #org_id#
+	</update>
+	
+	
+	<delete id="deleteOrg" parameterClass="Long">
+		delete from gawa_organization where org_id = #org_id#
+	</delete>
+
+
+</sqlMap>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.ap">
+
+	<typeAlias alias="Ap" type="com.qianmo.gawa.ap.Ap" />
+	
+	<resultMap id="ApResult" class="Ap">
+		<result property="allap_id"                     column="allap_id"                 />
+		<result property="area_id"                      column="area_id"                  />
+		<result property="equipment_code"                 column="equipment_code"             />
+		<result property="mac"                          column="mac"                      />
+		<result property="area_code"                    column="area_code"                />
+		<result property="longitude"                    column="longitude"                />
+		<result property="latitude"                     column="latitude"                 />
+		<result property="floor1"                        column="floor1"                    />
+		<result property="station_info"                 column="station_info"             />
+		<result property="subway_line_info"             column="subway_line_info"         />
+		<result property="subway_vehical_info"          column="subway_vehical_info"      />
+		<result property="subway_compartment_no"        column="subway_compartment_no"    />
+		<result property="car_code"                     column="car_code"                 />
+		<result property="state"                        column="state"                    />
+		<result property="approval"                     column="approval"                    />
+
+		
+	</resultMap>
+
+	<select id="findApByPage"  parameterClass="java.util.Map" resultClass="Ap">
+		SELECT 
+			*
+		FROM 
+			gawa_all_ap limit #offset# ,#rows#
+		
+	</select>
+	<select id="findApAll"   resultClass="Ap">
+		SELECT 
+			*
+		FROM 
+			gawa_all_ap 
+		
+	</select>
+	<select id="findApCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_all_ap 
+		
+	</select>
+	<select id="findApOnlineCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_all_ap where day_state=1
+		
+	</select>
+	<select id="findApById" parameterClass="Integer" resultClass="Ap">
+		SELECT 
+			*
+		FROM 
+			gawa_all_ap 
+		WHERE 
+		 	allap_id=#id#
+	</select>
+	<select id="findApByCode" parameterClass="Map" resultClass="Ap">
+		SELECT 
+			*
+		FROM 
+			gawa_all_ap 
+		WHERE 
+		 	(
+		 	equipment_code like concat('%',#code#,'%') or
+		 	mac like concat('%',#code#,'%') or
+		 	area_code like concat('%',#code#,'%') or
+		 	car_code like concat('%',#code#,'%')  
+		 	)
+		 <isNotEmpty prepend="and" property="state">
+             <![CDATA[ 
+             state=#state# 
+             ]]>
+         </isNotEmpty>
+		 	
+	</select>
+	<select id="findApByState" parameterClass="Integer" resultClass="Ap">
+		SELECT 
+			*
+		FROM 
+			gawa_all_ap 
+		WHERE 
+		 	state=#state#
+	</select>
+	
+		<insert id="addAp" parameterClass="Ap">
+		INSERT INTO gawa_all_ap (
+			allap_id,        
+			area_id,         
+			equipment_code,    
+			mac,             
+			area_code,       
+			longitude,       
+			latitude,        
+			floor1,           
+			station_info,    
+			subway_line_info,
+			subway_vehical_info,
+			subway_compartment_no,
+			car_code,        
+			state,
+			state_time           
+
+		) VALUES(
+			#allap_id#,             
+			#area_id#,              
+			#equipment_code#,         
+			#mac#,                  
+			#area_code#,            
+			#longitude#,            
+			#latitude#,             
+			#floor1#,                
+			#station_info#,         
+			#subway_line_info#,     
+			#subway_vehical_info#,  
+			#subway_compartment_no#,
+			#car_code#,             
+			#state#,  
+			#state_time#
+		) 
+	</insert>
+		
+	<update id="updateApById" parameterClass="Ap">
+		update gawa_all_ap
+		set area_code=#area_code#,car_code = #car_code#,state=#state#,approval=#approval#
+			where allap_id = #allap_id#
+	</update>
+	<update id="updateApStateById" parameterClass="Ap">
+		update gawa_all_ap
+		set state=#state#,data_state=#data_state#,working_state=#working_state#
+			where allap_id = #allap_id#
+	</update>
+	<update id="updateApAllStateByCode" parameterClass="Ap">
+		update gawa_all_ap
+		set state=#state#, day_state=#state#,state_time=#state_time#
+			where equipment_code = #equipment_code#
+	</update>
+	<update id="updateApStateByCode" parameterClass="Ap">
+		update gawa_all_ap
+		set state=#state#, state_time=#state_time#
+			where equipment_code = #equipment_code#
+	</update>
+	<update id="updateApDataStateByCode" parameterClass="Ap">
+		update gawa_all_ap
+		set data_state=#data_state#, data_state_time=#data_state_time#
+			where equipment_code = #equipment_code#
+	</update>
+	
+	<update id="updateApStateByPeriod" parameterClass="Map">
+		update gawa_all_ap
+		set state=0, state_time=#cur_time#
+			where state = 1 and (#cur_time# - state_time) > #period#
+	</update>
+	<update id="updateApDataStateByPeriod" parameterClass="Map">
+		update gawa_all_ap
+		set data_state=0, data_state_time=#cur_time#
+			where data_state = 1 and (#cur_time# - data_state_time) > #period#
+	</update>
+	
+	<delete id="deleteAp" parameterClass="Long">
+		delete from gawa_all_ap where allap_id = #allap_id#
+	</delete>
+
+
+</sqlMap>

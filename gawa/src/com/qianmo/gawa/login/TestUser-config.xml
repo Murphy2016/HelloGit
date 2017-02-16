@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.login">
+
+	<typeAlias alias="TestUser" type="com.qianmo.gawa.login.TestUser" />
+	
+	<resultMap id="TestResult" class="TestUser">
+		<result property="firstname" column="firstname" />
+		<result property="lastname" column="lastname" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		
+	</resultMap>
+
+	<select id="findAll"  parameterClass="java.util.Map" resultClass="TestUser">
+		SELECT 
+			*
+		FROM 
+			users limit #offset# ,#rows#
+		
+	</select>
+	<select id="findCount"   resultClass="Integer">
+		select count(*) from 
+			users 
+		
+	</select>
+	
+	<insert id="addTestUser" parameterClass="TestUser">
+		INSERT INTO users (
+			firstname,
+			lastname,
+			phone,
+			email
+			
+				
+		) VALUES(
+			#firstname#,
+			#lastname#,
+			#phone#,
+			#email#
+			
+		) 
+	</insert>
+
+
+</sqlMap>

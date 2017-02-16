@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.operlog">
+
+	<typeAlias alias="Operlog" type="com.qianmo.gawa.operlog.Operlog" />
+	
+	<resultMap id="OperlogResult" class="Operlog">
+		<result property="oper_id" column="oper_id" />
+		<result property="username" column="username" />
+		<result property="operation" column="operation" />
+		<result property="add_time" column="add_time" />
+		
+		
+	</resultMap>
+
+	<select id="findOperlogByPage"  parameterClass="java.util.Map" resultClass="Operlog">
+		SELECT 
+			*
+		FROM 
+			gawa_operation_log order by oper_id desc limit #offset# ,#rows#
+		
+	</select>
+	<select id="findOperlogCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_operation_log 
+		
+	</select>
+	<select id="findOperlogById" parameterClass="Integer" resultClass="Operlog">
+		SELECT 
+			*
+		FROM 
+			gawa_operation_log 
+		WHERE 
+		 	oper_id=#id#
+	</select>
+	<select id="findSetting"  resultClass="Integer">
+		SELECT 
+			period
+		FROM 
+			sys_setting 
+		WHERE 
+		 	id=1
+	</select>
+	
+		<insert id="addOperlog" parameterClass="Operlog">
+		INSERT INTO gawa_operation_log (
+			username,
+			operation
+				
+		) VALUES(
+			#username#,
+			#operation#
+			
+		) 
+	</insert>
+		
+	<update id="updateOperlogById" parameterClass="Operlog">
+		update gawa_operation_log
+		set operation = #operation#
+			where oper_id = #oper_id#
+	</update>
+	<update id="updateSetting" parameterClass="Integer">
+		update sys_setting
+		set period = #period#
+			where id = 1
+	</update>
+	<delete id="deleteOperlog" parameterClass="Integer">
+		delete from gawa_operation_log where oper_id = #oper_id#
+	</delete>
+	
+	<delete id="deleteOperlogByTime" parameterClass="String">
+		delete from gawa_operation_log where 
+		<![CDATA[
+		add_time < #add_time#
+		]]>
+	</delete>
+
+
+</sqlMap>

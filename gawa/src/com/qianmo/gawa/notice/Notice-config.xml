@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.notice">
+
+	<typeAlias alias="Notice" type="com.qianmo.gawa.notice.Notice" />
+	
+	<resultMap id="NoticeResult" class="Notice">
+		<result property="notice_id" column="notice_id" />
+		<result property="content" column="content" />
+		<result property="date1" column="date1" />
+		<result property="reply" column="reply" />
+		<result property="reply_date" column="reply_date" />
+		
+		
+	</resultMap>
+
+	<select id="findNoticeByPage"  parameterClass="java.util.Map" resultClass="Notice">
+		SELECT 
+			*
+		FROM 
+			gawa_notice limit #offset# ,#rows#
+		
+	</select>
+	<select id="findNoticeCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_notice 
+		
+	</select>
+	<select id="findNoticeById" parameterClass="Integer" resultClass="Notice">
+		SELECT 
+			*
+		FROM 
+			gawa_notice 
+		WHERE 
+		 	notice_id=#id#
+	</select>
+	
+		<insert id="addNotice" parameterClass="Notice">
+		INSERT INTO gawa_notice (
+			notice_id,
+			content,
+			date1,
+			reply,
+			reply_date
+				
+		) VALUES(
+			#notice_id#,
+			#content#,
+			#date1#,
+			#reply#,
+			#reply_date#
+			
+		) 
+	</insert>
+		
+	<update id="updateNoticeById" parameterClass="Notice">
+		update gawa_notice
+		set content = #content#,reply=#reply#
+			where notice_id = #notice_id#
+	</update>
+	<delete id="deleteNotice" parameterClass="Long">
+		delete from gawa_notice where notice_id = #notice_id#
+	</delete>
+
+
+</sqlMap>

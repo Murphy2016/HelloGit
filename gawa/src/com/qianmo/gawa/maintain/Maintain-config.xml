@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.maintain">
+
+	<typeAlias alias="Maintain" type="com.qianmo.gawa.maintain.Maintain" />
+	
+	<resultMap id="MaintainResult" class="Maintain">
+		<result property="maintain_id" column="maintain_id" />
+		<result property="equipment_code" column="equipment_code" />
+		<result property="area_code" column="area_code" />
+		<result property="mac" column="mac" />
+		<result property="date1" column="date1" />
+		<result property="note" column="note" />
+		<result property="need_time" column="need_time" />
+		
+		
+	</resultMap>
+
+	<select id="findMaintainByPage"  parameterClass="java.util.Map" resultClass="Maintain">
+		SELECT 
+			*
+		FROM 
+			gawa_maintain_log order by maintain_id desc  limit #offset# ,#rows#
+		
+	</select>
+	<select id="findMaintainCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_maintain_log 
+		
+	</select>
+	<select id="findMaintainById" parameterClass="Integer" resultClass="Maintain">
+		SELECT 
+			*
+		FROM 
+			gawa_maintain_log 
+		WHERE 
+		 	maintain_id=#id#
+	</select>
+	<select id="findMaintainByCode" parameterClass="String" resultClass="Maintain">
+		SELECT 
+			*
+		FROM 
+			gawa_maintain_log 
+		WHERE 
+		 	equipment_code like concat('%',#code#,'%') or
+		 	area_code like concat('%',#code#,'%') or 
+		 	mac like concat('%',#code#,'%')
+	</select>
+	<select id="findMaintainByDate" parameterClass="String" resultClass="Maintain">
+		SELECT 
+			*
+		FROM 
+			gawa_maintain_log 
+		WHERE 
+		 	date1=#date#
+	</select>
+	
+		<insert id="addMaintain" parameterClass="Maintain">
+		INSERT INTO gawa_maintain_log (
+			maintain_id,
+			equipment_code,
+			area_code,
+			mac,
+			date1,
+			note,
+			need_time
+				
+		) VALUES(
+			#maintain_id#,
+			#equipment_code#,
+			#area_code#,
+			#mac#,
+			#date1#,
+			#note#,
+			#need_time#
+			
+		) 
+	</insert>
+		
+	<update id="updateMaintainById" parameterClass="Maintain">
+		update gawa_maintain_log
+		set mac = #mac#,note=#note#
+			where maintain_id = #maintain_id#
+	</update>
+	<delete id="deleteMaintain" parameterClass="Long">
+		delete from gawa_maintain_log where maintain_id = #maintain_id#
+	</delete>
+
+
+</sqlMap>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MESSAGE>
+	<DATASET name="WA_COMMON_01001" rmk="数据文件索引信息">
+		<DATA>
+			<DATASET name="WA_COMMON_01001" rmk="BCP文件格式信息">
+				<DATA>
+					<ITEM key="I010032" val="\t" rmk="列分隔符（缺少值时默认为制表符\t）" />
+					<ITEM key="I010033" val="\n" rmk="行分隔符（缺少值时默认为换行符\n）" />
+					<ITEM key="A010004" val="WA_BASIC_FJ_0001" rmk="数据集代码" />
+					<ITEM key="B050016" val="145" rmk="数据来源" />
+					<ITEM key="G020013" val="353030334" rmk="网安专用产品厂家组织机构代码" />
+					<ITEM key="F010008" val="440300" rmk="数据采集地" />
+					<ITEM key="I010038" val="1" rmk="数据起始行，可选项，不填写默认为第１行" />
+					<ITEM key="I010039" val="UTF-8" rmk="可选项，默认为UTF-8，BCP文件编码格式（采用不带格式的编码方式，如：UTF-8无BOM）" />
+					<DATASET name="WA_COMMON_01001" rmk="BCP文件结构信息">
+						<DATA>
+							<ITEM key="H040003" val="./" rmk="文件路径" />
+							<ITEM key="H010020" val="145-440300-1452559951-00001-WA_BASIC_FJ_0001-0.bcp" rmk="文件名" />
+							<ITEM key="I010034" val="1000" rmk="记录行数" />
+						</DATA>
+					</DATASET>
+					<DATASET name="WA_COMMON_01001" rmk="BCP文件数据信息" fieldcnt="17">
+						<DATA>
+							<ITEM key="G020004" eng="log_id" chn="上网日志存储编号" Rmrmkk="" />
+							<ITEM key="F010002" eng="area_id" chn="地区存储编号" Rmrmkk="" />					
+              <ITEM key="G020017" eng="allap_id" chn="设备存储编号" Rmrmkk="" />
+              <ITEM key="F010016" eng="session_id" chn="会话ID" Rmrmkk="" />
+              <ITEM key="F010017" eng="create_time" chn="上线时间" Rmrmkk="" />
+              <ITEM key="F040011" eng="auth_area_code" chn="场所编码" Rmrmkk="" />
+              <ITEM key="E010007" eng="protocol_type" chn="协议类型" Rmrmkk="" />
+              <ITEM key="E020001" eng="ip_lan" chn="内网IP" Rmrmkk="" />
+              <ITEM key="E020003" eng="ip_port_lan" chn="tcp协议端口" Rmrmkk="" />
+              <ITEM key="E020004" eng="ip4_wan" chn="源外网IP" Rmrmkk="" />
+              <ITEM key="B070003" eng="ip6_wan" chn="源外网ip" Rmrmkk="" />
+              <ITEM key="I070009" eng="ip4_port_start_wan" chn="起始端口" Rmrmkk="" />
+              <ITEM key="I070010" eng="ip4_port_end_wan" chn="结束端口" Rmrmkk="" />
+              <ITEM key="G020010" eng="ip6_port_start_wan" chn="起始端口" Rmrmkk="" />
+              <ITEM key="B020001" eng="ip6_port_end_wan" chn="结束端口" Rmrmkk="" />
+              <ITEM key="I070016" eng="ip4_target_wan" chn="目的外网ip" Rmrmkk="" />
+              <ITEM key="G020013" eng="ip6_target_wan" chn="目的外网ip" Rmrmkk="" />
+              
+              <ITEM key="G120004" eng="ip4_target_port_wan" chn="目的外网端口" Rmrmkk="" />
+							<ITEM key="F110002" eng="ip6_target_port_wan" chn="目的外网端口" Rmrmkk="" />					
+              <ITEM key="G120017" eng="user_mac" chn="用户终端mac" Rmrmkk="" />
+              <ITEM key="F110016" eng="ap_code" chn="设备编码" Rmrmkk="" />
+              <ITEM key="F110017" eng="ap_mac" chn="设备mac" Rmrmkk="" />
+              <ITEM key="F140011" eng="ap_longitude" chn="设备经度" Rmrmkk="" />
+              <ITEM key="E110007" eng="ap_latitude" chn="设备纬度" Rmrmkk="" />
+ 
+						</DATA>
+					</DATASET>
+				</DATA>
+			</DATASET>
+		</DATA>
+	</DATASET>
+</MESSAGE>

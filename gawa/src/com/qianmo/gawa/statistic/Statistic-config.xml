@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.statistic">
+
+	<typeAlias alias="Statistic" type="com.qianmo.gawa.statistic.Statistic" />
+	
+	<resultMap id="StatisticResult" class="Statistic">
+		<result property="statistic_id" column="statistic_id" />
+		<result property="total" column="total" />
+		<result property="working" column="working" />
+		<result property="unworking" column="unworking" />
+		<result property="date1" column="date1" />
+	</resultMap>
+	<resultMap id="StatisticResult1" class="Statistic">
+		<result property="id" column="id" />
+		<result property="mobileno" column="mobileno" />
+		<result property="count" column="count" />
+		<result property="mac" column="mac" />
+		<result property="imsi" column="imsi" />
+		<result property="uid" column="uid" />
+		<result property="date1" column="date1" />
+	</resultMap>
+	<resultMap id="StatisticResult2" class="Statistic">
+		<result property="id" column="id" />
+		
+		<result property="count" column="count" />
+		
+		<result property="service_online" column="service_online" />
+		<result property="service_offline" column="service_offline" />
+		<result property="data_online" column="data_online" />
+		<result property="date_offline" column="date_offline" />
+		<result property="maintain" column="maintain" />
+		<result property="exception" column="exception" />
+		<result property="other" column="other" />
+		<result property="bus" column="bus" />
+		
+	</resultMap>
+
+	<select id="findStatisticByPage"  parameterClass="java.util.Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_area_state order by id desc limit #offset# ,#rows#
+		
+	</select>
+	<select id="findStatisticCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_area_state 
+		
+	</select>
+	<select id="findStatisticUserCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_user_statistic 
+		
+	</select>
+	<select id="findStatisticById" parameterClass="Integer" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_area_state 
+		WHERE 
+		 	statistic_id=#id#
+	</select>
+	<select id="findStatisticUserByPage"  parameterClass="java.util.Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_user_statistic limit #offset# ,#rows#
+		
+	</select>
+	<select id="findStatisticUserByDate" parameterClass="Map" resultClass="Statistic">
+		SELECT 
+			 
+			date1, SUM(count) AS count FROM gawa_user_statistic
+
+		
+		WHERE 
+		 <![CDATA[
+		 	date1 >= #date1# AND
+		 	date1 <= #date2#
+		 ]]>
+		 <isNotEmpty prepend="and" property="mobileno">
+             <![CDATA[ 
+             mobileno=#mobileno# 
+             ]]>
+         </isNotEmpty>
+         GROUP BY date1 
+	</select>
+	<select id="findStatisticAreaByDate" parameterClass="Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_area_state 
+		WHERE 
+		 <![CDATA[
+		 	date1 >= #date1# AND
+		 	date1 <= #date2#
+		 ]]>
+		 
+	</select>
+	
+	<select id="findStatisticApByPage"  parameterClass="java.util.Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_ap_state order by id desc limit #offset# ,#rows#
+		
+	</select>
+	<select id="findStatisticApCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_ap_state 
+		
+	</select>
+	<select id="findStatisticApByDate" parameterClass="Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_ap_state 
+		WHERE 
+		 <![CDATA[
+		 	date1 >= #date1# AND
+		 	date1 <= #date2#
+		 ]]>
+		 
+	</select>
+	
+	<select id="findStatisticRealnameByPage"  parameterClass="java.util.Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_realname_count order by id desc limit #offset# ,#rows#
+		
+	</select>
+	<select id="findStatisticRealnameCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_realname_count 
+		
+	</select>
+	<select id="findStatisticRealnameByDate" parameterClass="Map" resultClass="Statistic">
+		SELECT 
+			*
+		FROM 
+			gawa_realname_count 
+		WHERE 
+		 <![CDATA[
+		 	date1 >= #date1# AND
+		 	date1 <= #date2#
+		 ]]>
+		 
+	</select>
+	
+		<insert id="addStatistic" parameterClass="Statistic">
+		INSERT INTO gawa_ap_statistic (
+			statistic_id,
+			total,
+			working,
+			unworking,
+			date1
+			
+				
+		) VALUES(
+			#statistic_id#,
+			#total#,
+			#working#,
+			#unworking#,
+			#date1#
+			
+			
+		) 
+	</insert>
+	
+	<insert id="addApState" parameterClass="Statistic">
+		INSERT INTO gawa_ap_state (
+			count,
+			service_online,
+			service_offline,
+			data_online,
+			date_offline,
+			working,
+			maintain,
+			exception,
+			other,
+			date1
+			
+				
+		) VALUES(
+			#count#,
+			#service_online#,
+			#service_offline#,
+			#data_online#,
+			#date_offline#,
+			#working#,
+			#maintain#,
+			#exception#,
+			#other#,
+			#date1#
+			
+			
+		) 
+	</insert>
+	
+	<insert id="addAreaState" parameterClass="Statistic">
+		INSERT INTO gawa_area_state (
+			count,
+			working,
+			unworking,
+			
+			date1
+			
+				
+		) VALUES(
+			#count#,
+			#working#,
+			#unworking#,
+			
+			#date1#
+			
+			
+		) 
+	</insert>
+	
+	<insert id="addUserState" parameterClass="Statistic">
+		INSERT INTO gawa_user_statistic (
+			mobileno,
+			count,
+			
+			mac,
+			imsi,
+			uid,
+			date1
+			
+				
+		) VALUES(
+			#mobileno#,
+			#count#,
+			
+			#mac#,
+			#imsi#,
+			#uid#,
+			#date1#
+			
+			
+		) 
+	</insert>
+	<insert id="addRealnameState" parameterClass="Statistic">
+		INSERT INTO gawa_realname_count (
+			
+			count,
+			
+			bus,
+			
+			date1
+			
+				
+		) VALUES(
+			
+			#count#,
+			
+			#bus#,
+			
+			#date1#
+			
+			
+		) 
+	</insert>
+	
+		
+	<update id="updateStatisticById" parameterClass="Statistic">
+		update gawa_ap_statistic
+		set working = #working#,unworking=#unworking#
+			where statistic_id = #statistic_id#
+	</update>
+	<delete id="deleteStatistic" parameterClass="Long">
+		delete from gawa_ap_statistic where statistic_id = #statistic_id#
+	</delete>
+
+
+</sqlMap>

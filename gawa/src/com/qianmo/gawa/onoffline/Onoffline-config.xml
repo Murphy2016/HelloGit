@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.gawa.onoffline">
+
+	<typeAlias alias="Onoffline" type="com.qianmo.gawa.onoffline.Onoffline" />
+	
+	<resultMap id="OnofflineResult" class="Onoffline">
+		<result property="onoff_id"                          column="onoff_id"                        />
+		<result property="area_id"                           column="area_id"                         />
+		<result property="allap_id"                          column="allap_id"                        />
+		<result property="auth_type"                         column="auth_type"                       />
+		<result property="auth_name"                         column="auth_name"                       />
+		<result property="auth_area_code"                    column="auth_area_code"                  />
+		<result property="auth_area_type"                    column="auth_area_type"                  />
+		<result property="identification_type"               column="identification_type"             />
+		<result property="identification"                    column="identification"                  />
+		<result property="app_company_name"                  column="app_company_name"                />
+		<result property="app_software_name"                 column="app_software_name"               />
+		<result property="app_version"                       column="app_version"                     />
+		<result property="app_id"                            column="app_id"                          />
+		<result property="auth_time"                         column="auth_time"                       />
+		<result property="de_auth_time"                      column="de_auth_time"                    />
+		<result property="ip_lan"                            column="ip_lan"                          />
+		<result property="ip4_wan"                           column="ip4_wan"                         />
+		<result property="ip6_wan"                           column="ip6_wan"                         />
+		<result property="ip4_port_start_wan"                column="ip4_port_start_wan"              />
+		<result property="ip4_port_end_wan"                  column="ip4_port_end_wan"                />
+		<result property="ip6_port_start_wan"                column="ip6_port_start_wan"              />
+		<result property="ip6_port_end_wan"                  column="ip6_port_end_wan"                />
+		<result property="user_mac"                          column="user_mac"                        />
+		<result property="ap_code"                           column="ap_code"                         />
+		<result property="ap_mac"                            column="ap_mac"                          />
+		<result property="ap_longitude"                      column="ap_longitude"                    />
+		<result property="ap_latitude"                       column="ap_latitude"                     />
+		<result property="session_id"                        column="session_id"                      />
+		<result property="ap_signal_strength"                column="ap_signal_strength"              />
+		<result property="location_x"                        column="location_x"                      />
+		<result property="location_y"                        column="location_y"                      />
+		<result property="name1"                              column="name1"                            />
+		<result property="imsi"                              column="imsi"                            />
+		<result property="imei"                              column="imei"                            />
+		<result property="os_name"                           column="os_name"                         />
+		<result property="brand"                             column="brand"                           />
+		<result property="model"                             column="model"                           />
+		
+	</resultMap>
+
+	<select id="findOnofflineByPage"  parameterClass="java.util.Map" resultClass="Onoffline">
+		SELECT 
+			*
+		FROM 
+			gawa_onoffline_record ORDER BY onoff_id DESC limit #offset# ,#rows#
+		
+	</select>
+	<select id="findOnofflineCount"   resultClass="Integer">
+		select count(*) from 
+			gawa_onoffline_record 
+		
+	</select>
+	<select id="findUserDayCount"   parameterClass="java.util.Map" resultClass="java.util.HashMap"
+		 remapResults="true">
+		SELECT identification as mobileno, COUNT(*) AS count
+		FROM gawa_onoffline_record
+		 
+		<![CDATA[
+		where auth_time>=#start# 
+		and auth_time<#end#  
+		 ]]>
+		GROUP BY identification 
+		ORDER BY count DESC 
+		
+	</select>
+	<select id="findRealnameDayCount"   parameterClass="java.util.Map" resultClass="Integer">
+		SELECT COUNT(DISTINCT(identification)) FROM gawa_onoffline_record
+		<![CDATA[
+		where auth_time>=#start# 
+		and auth_time<#end#  
+		 ]]>
+		
+		
+	</select>
+	
+	
+	
+	<select id="findOnofflineById" parameterClass="Integer" resultClass="Onoffline">
+		SELECT 
+			*
+		FROM 
+			gawa_onoffline_record 
+		WHERE 
+		 	onoff_id=#id#
+	</select>
+	
+	
+	
+	<select id="findOnofflineCountByIdentification"  parameterClass="String" resultClass="Integer">
+		select count(*) from 
+			gawa_onoffline_record 
+			where 
+				identification=#identification#
+	</select>
+	<select id="findOnofflineByIdentification" parameterClass="Map" resultClass="Onoffline">
+		SELECT 
+			*
+		FROM 
+			gawa_onoffline_record 
+		WHERE 
+		 	identification=#identification#
+		 	ORDER BY onoff_id DESC
+		 	limit #offset# ,#rows#
+	</select>
+	<select id="findOnofflineCountByDate"  parameterClass="Map" resultClass="Integer">
+		select count(*) from 
+			gawa_onoffline_record 
+			where 
+				<![CDATA[
+		 	auth_time >= #date1# AND
+		 	auth_time <= #date2#
+			 ]]>
+			 <isNotEmpty prepend="and" property="identification">
+	             <![CDATA[ 
+	             identification=#identification# 
+	             ]]>
+	         </isNotEmpty>
+	</select>
+	<select id="findOnofflineByDate" parameterClass="Map" resultClass="Onoffline">
+		SELECT 
+			*
+		FROM 
+			gawa_onoffline_record 
+		WHERE 
+		<![CDATA[
+		 	auth_time >= #date1# AND
+		 	auth_time <= #date2#
+		 ]]>
+		 <isNotEmpty prepend="and" property="identification">
+             <![CDATA[ 
+             identification=#identification# 
+             ]]>
+         </isNotEmpty>
+         ORDER BY onoff_id DESC
+         limit #offset# ,#rows#
+	</select>
+	
+		<insert id="addOnoffline" parameterClass="Onoffline">
+		INSERT INTO gawa_onoffline_record (
+			onoff_id,
+			area_id,
+			allap_id,
+			auth_type,
+			auth_name,
+			auth_area_code,
+			auth_area_type,
+			identification_type,
+			identification,
+			app_company_name,
+			app_software_name,
+			app_version,
+			app_id,
+			auth_time,
+			de_auth_time,
+			ip_lan,
+			ip4_wan,
+			ip6_wan,
+			ip4_port_start_wan,
+			ip4_port_end_wan,
+			ip6_port_start_wan,
+			ip6_port_end_wan,
+			user_mac,
+			ap_code,
+			ap_mac,
+			ap_longitude,
+			ap_latitude,
+			session_id,
+			ap_signal_strength,
+			location_x,
+			location_y,
+			name1,
+			imsi,
+			imei,
+			os_name,
+			brand,
+			model           
+
+		) VALUES(
+			#onoff_id#,
+			#area_id#,
+			#allap_id#,
+			#auth_type#,
+			#auth_name#,
+			#auth_area_code#,
+			#auth_area_type#,
+			#identification_type#,
+			#identification#,
+			#app_company_name#,
+			#app_software_name#,
+			#app_version#,
+			#app_id#,
+			#auth_time#,
+			#de_auth_time#,
+			#ip_lan#,
+			#ip4_wan#,
+			#ip6_wan#,
+			#ip4_port_start_wan#,
+			#ip4_port_end_wan#,
+			#ip6_port_start_wan#,
+			#ip6_port_end_wan#,
+			#user_mac#,
+			#ap_code#,
+			#ap_mac#,
+			#ap_longitude#,
+			#ap_latitude#,
+			#session_id#,
+			#ap_signal_strength#,
+			#location_x#,
+			#location_y#,
+			#name1#,
+			#imsi#,
+			#imei#,
+			#os_name#,
+			#brand#,
+			#model#
+ 
+		) 
+	</insert>
+		
+	<update id="updateOnofflineById" parameterClass="Onoffline">
+		update gawa_onoffline_record
+		set ap_longitude = #ap_longitude#,ap_latitude=#ap_latitude#
+			where onoff_id = #onoff_id#
+	</update>
+	<update id="updateOnofflineByUsermac" parameterClass="Onoffline">
+
+		UPDATE gawa_onoffline_record a, (SELECT onoff_id FROM gawa_onoffline_record
+			WHERE user_mac=#user_mac# ORDER BY onoff_id DESC LIMIT 1) b
+		SET a.de_auth_time = #de_auth_time# 
+			WHERE a.onoff_id =b.onoff_id	
+	</update>
+	<delete id="deleteOnoffline" parameterClass="Long">
+		delete from gawa_onoffline_record where onoff_id = #onoff_id#
+	</delete>
+
+	<delete id="deleteOnofflineByTime" parameterClass="Long">
+		delete from gawa_onoffline_record where 
+		<![CDATA[
+		auth_time < #auth_time#
+		]]>
+	</delete>
+	
+</sqlMap>
