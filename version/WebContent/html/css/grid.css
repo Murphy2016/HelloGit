@@ -1,0 +1,36 @@
+
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#666666;
+	border-width: 1px;
+	border-color: #95B8E7;
+	border-collapse: collapse;
+	width:1020px;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #95B8E7;
+
+}
+
+table.gridtable td.altrow {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #95B8E7;
+	background-color: #DDEAFF;
+}
+
+.css1 {background-color: #ffffff;}
+.css2 {background-color: #dedede;}
+.selected{background-color: #96B0FF;}

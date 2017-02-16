@@ -1,0 +1,23 @@
+
+.icon-cancel-16{
+	background:url('cancel-16.png') no-repeat center center;
+}
+.icon-confirm-16{
+	background:url('confirm-16.png') no-repeat center center;
+}
+
+.icon-save-16{
+	background:url('save_16.png') no-repeat center center;
+}
+.icon-edit-16{
+	background:url('edit_16.png') no-repeat center center;
+}
+.icon-moveup-16{
+	background:url('moveup_16.png') no-repeat center center;
+}
+.icon-movedown-16{
+	background:url('movedown_16.png') no-repeat center center;
+}
+.icon-view-img-16{
+	background:url('view_img_16.png') no-repeat center center;
+}

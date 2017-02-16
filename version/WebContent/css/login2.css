@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: #F5F5F5;
+  font-family: "微软雅黑";
+}
+a {
+  list-style: none;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  position: relative;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  background: url(../image/login-bg.jpg) no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+.content {
+  width: 512px;
+  height: 420px;
+}
+.content form .p1 {
+  position: absolute;
+  top: 26%;
+  left: 53%;
+}
+.content form .p1 .login_bar {
+  width: 1px;
+  height: 29px;
+  position: absolute;
+  left: 55px;
+}
+.content form .p1 input {
+  width: 327px;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  background: none;
+  padding-left: 35px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 21px;
+  font-family: "细黑";
+  /*font-weight: bold;*/
+  margin-top: -33px;
+  margin-left: 34px;
+}
+.content form .p2 {
+  position: absolute;
+  top: 42%;
+  left: 56%;
+}
+.content form .p2 .login_bar {
+  width: 1px;
+  height: 29px;
+  position: absolute;
+  left: 55px;
+}
+.content form .p2 input {
+  width: 327px;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  background: none;
+  padding-left: 35px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 21px;
+  font-family: "细黑";
+ /* font-weight: bold;*/
+  margin-top: -35px;
+  margin-left: 34px;
+}
+.content form .p3 {
+  position: absolute;
+  top: 63%;
+  left: 56%;
+}
+.content form .p3 .button{
+  width:130px;
+  height:40px;
+
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #112e50 inset;
+    outline: none !important;
+}
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    -webkit-box-shadow: 0 0 0 1000px #112e50 inset;
+    outline: none !important;
+}
+/*# sourceMappingURL=login2.css.map */

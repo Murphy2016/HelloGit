@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "细黑";
+}
+a {
+  list-style: none;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+body {
+  background: url(../image/login-bg2.jpg) no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  overflow: hidden;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.content {
+  width: 71%;
+  height: 72%;
+  position: absolute;
+  left: 8%;
+  top: 13%;
+}
+.content img {
+  width: 135%;
+  height: 130%;
+  display: block;
+  background-size: 100% 100%;
+  position: absolute;
+  left: -10%;
+  top: -12%;
+}
+.content form .p1 .person_img {
+  width: 2%;
+  height: 4%;
+  position: absolute;
+  top: 23%;
+  left: 62%;
+}
+.content form .p1 .login_bar {
+  width: 0.07%;
+  height: 4%;
+  position: absolute;
+  top: 23.5%;
+  left: 66%;
+}
+.content form .p1 input {
+  position: absolute;
+  left: 67%;
+  top: 23%;
+  width: 20%;
+  height: 5%;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 130%;
+  font-family: "细黑";
+  font-weight: bold;
+}
+.content form .p2 .pass_img {
+  width: 2%;
+  height: 5%;
+  position: absolute;
+  top: 44%;
+  left: 65%;
+}
+.content form .p2 .login_bar2 {
+  width: 0.09%;
+  height: 4%;
+  position: absolute;
+  top: 45%;
+  left: 69%;
+}
+.content form .p2 input {
+  position: absolute;
+  top: 44%;
+  left: 70%;
+  width: 20%;
+  height: 5%;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 130%;
+  font-family: "细黑";
+  font-weight: bold;
+}
+.content form .p3 .button {
+  width: 12%;
+  height: 7%;
+  position: absolute;
+  top: 70.5%;
+  left: 66.5%;
+}
+
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;   
+     outline: none !important;
+}
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    -webkit-box-shadow:0 0 0 1000px transparent inset;
+    outline: none !important;
+}
+.inputList{
+	/*margin-left:1%;
+	margin-top: 1%;*/
+	margin-top:0.3%;
+}
+.inputList ul li{
+	width:750%;
+	height:12%;
+	font-size:18px;
+	color: rgba(255, 255, 255, 0.9);
+	background: rgba(20,51,86,0.8);
+	padding-left: 25%;	
+	font-family: "细黑";
+	
+}
+/*# sourceMappingURL=login3.css.map */

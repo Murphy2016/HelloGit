@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.qianmo.version.basic">
+	<typeAlias alias="Version" type="com.qianmo.version.basic.Version" />
+	
+	<resultMap id="VersionResult" class="Version">
+		<result property="device_id"         column="device_id" />
+		<result property="biz_num"         column="biz_num" />
+		<result property="software_name"         column="software_name" />
+		<result property="version"         column="version" />
+		<result property="flag"         column="flag" />
+		<result property="update_time"         column="update_time" />
+		<result property="create_time"         column="create_time" />	
+		<result property="count"         column="count" />		
+	
+	</resultMap>
+	
+	<select id="findVersionById" parameterClass="Integer" resultClass="Version">
+		select * from dev_soft_version where device_id=#device_id#
+		
+	</select>
+	<select id="findVersionByBizs" parameterClass="String" resultClass="Version">
+		select * from dev_soft_version where biz_num in ($biz_nums$) 
+		
+		and ( software_name='xl' 
+		or software_name='portal')
+		
+	</select>
+	<select id="findVersionByPage"  parameterClass="java.util.Map" resultClass="Version">
+		SELECT 
+			*
+		FROM 
+			dev_soft_version limit #offset# ,#rows#
+		
+	</select>
+	<select id="findVersionCount"   resultClass="Integer">
+		select count(*) from 
+			dev_soft_version 
+		
+	</select>
+	<select id="findSoftwareCount"   resultClass="Integer">
+		select count(distinct(software_name)) from 
+			dev_soft_version 
+		
+	</select>
+	<select id="findDeviceCount"   resultClass="Integer">
+		select count(distinct(device_id)) from 
+			dev_soft_version 
+		
+	</select>
+	<select id="findGroupCount"   resultClass="Version">
+		select software_name,version,count(*) as count 
+		from dev_soft_version group by software_name,version 
+		
+	</select>
+	<select id="findSoftwareGroupCount"   resultClass="Version">
+		select software_name,count(*) as count 
+		from dev_soft_version group by software_name 
+		
+	</select>
+	
+	<sql id="selectItem_fragment">
+		where 1=1 
+		 <isNotEmpty prepend="and" property="device_id">				 						
+		 	device_id = #device_id# 			 
+		 </isNotEmpty>
+		 <isNotEmpty prepend="and" property="biz_num">				 						
+		 	biz_num = #biz_num# 			 
+		 </isNotEmpty>
+		 <isNotEmpty prepend="and" property="software_name">				 						
+		 	software_name = #software_name# 			 
+		 </isNotEmpty>
+		 <isNotEmpty prepend="and" property="version">				 						
+		 	version = #version# 			 
+		 </isNotEmpty>
+		 <isNotEmpty prepend="and" property="update_time">
+		 	<![CDATA[				 						
+		 	(update_time >= #update_time# and	
+		 	update_time <= #update_time# + 24*3600*1000)
+		 	]]>				 
+		 </isNotEmpty>
+		 <isNotEmpty prepend="and" property="create_time">				 						
+		 	<![CDATA[
+		 	(create_time >= #create_time# and 
+		 	 create_time <= #create_time# + 24*3600*1000  )
+		    ]]>			 
+		 </isNotEmpty> 
+	</sql>
+	
+	<select id="findVersionCountBySearch"  parameterClass="Version" resultClass="Integer">
+		select count(*) as count 
+		from dev_soft_version 
+		<include refid="selectItem_fragment"/>
+	</select>
+	<select id="findVersionDeviceCountBySearch"  parameterClass="Version" resultClass="Integer">
+		select count(distinct(device_id)) as count 
+		from dev_soft_version 
+		<include refid="selectItem_fragment"/>
+	</select>
+	<select id="findVersionSoftwareCountBySearch"  parameterClass="Version" resultClass="Integer">
+		select count(distinct(software_name)) as count 
+		from dev_soft_version 
+		<include refid="selectItem_fragment"/>
+	</select>
+	<select id="findVersionVersionCountBySearch"  parameterClass="Version" resultClass="Integer">
+		select count(distinct(version)) as count 
+		from dev_soft_version 
+		<include refid="selectItem_fragment"/>
+	</select>
+	<select id="findVersionBySearch"  parameterClass="Version" resultClass="Version">
+		SELECT 
+			*
+		from dev_soft_version 
+		<include refid="selectItem_fragment"/>
+		<isNotEmpty  property="rows">	
+		 limit #offset#, #rows# 
+		</isNotEmpty>
+		
+	</select>
+	
+	<select id="findVersionCountBySearchNot"  parameterClass="Version" resultClass="Integer">
+		SELECT count(*) FROM (SELECT DISTINCT(device_id) ,biz_num FROM dev_soft_version) a 
+			LEFT JOIN (SELECT device_id AS bdevice_id FROM dev_soft_version WHERE 
+			software_name=#software_name#
+				<isNotEmpty prepend="and" property="version">	
+				 version= #version# 
+				</isNotEmpty>
+			
+			) b ON a.device_id=b.bdevice_id 
+			WHERE bdevice_id IS NULL
+	</select>
+	<select id="findVersionBySearchNot"  parameterClass="Version" resultClass="Version">
+		SELECT device_id,biz_num FROM (SELECT DISTINCT(device_id) ,biz_num FROM dev_soft_version) a 
+			LEFT JOIN (SELECT device_id AS bdevice_id FROM dev_soft_version WHERE 
+			software_name=#software_name#
+				<isNotEmpty prepend="and" property="version">	
+				 version= #version# 
+				</isNotEmpty>
+			
+			) b ON a.device_id=b.bdevice_id 
+			WHERE bdevice_id IS NULL
+		<isNotEmpty  property="rows">	
+		 limit #offset#, #rows# 
+		</isNotEmpty>
+		
+	</select>
+	
+	<select id="findHotlist" parameterClass="String" resultClass="java.util.HashMap">
+		select name,password from hotlist where wifi_sn=#wifi_sn#
+	</select>
+	<select id="findBindlist" parameterClass="String" resultClass="java.util.HashMap">
+		select wifi_sn,sn from yqc_device where wifi_sn=#wifi_sn#
+	</select>
+	
+	
+	<insert id="addVersion" parameterClass="Version">
+		INSERT INTO dev_soft_version (
+			device_id,
+			biz_num,
+			software_name,
+			version,
+			flag,
+			update_time,
+			create_time
+		)
+		VALUES(
+			#device_id#,
+			#biz_num#,
+			#software_name#,
+			#version#,
+			#flag#,
+			#update_time#,
+			#create_time#
+		
+		)
+	</insert>
+	
+	<insert id="addHotlist" parameterClass="java.util.HashMap">
+		insert into hotlist (
+			wifi_sn,
+			name,
+			password
+		)
+		values(
+			#wifi_sn#,
+			#name#,
+			#password#
+		)
+		
+		
+	</insert>
+	<insert id="addBindlist" parameterClass="java.util.HashMap">
+		insert into yqc_device (
+			wifi_sn,
+			sn
+		)
+		values(
+			#wifi_sn#,
+			#sn#
+		)
+		
+		
+	</insert>
+	
+	<update id="updateVersionById" parameterClass="Version">
+		update dev_soft_version set flag=#flag# 
+		where device_id = #device_id#
+	</update>
+	<delete id="deleteVersionById" parameterClass="Integer">
+		delete from dev_soft_version
+		where device_id = #device_id#
+	
+	</delete>
+	
+	
+</sqlMap>
