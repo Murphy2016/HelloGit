@@ -1,0 +1,15 @@
+架构思维
+ibatis，nosql，mongodb，
+JDK源码，
+spring,
+缓存、消息、大数据存储等相关技术，例如：redis、memcached、zookeeper、ActiveMQ、dubbo、elasticsearch、mongodb、hbase等；
+优秀开源软件研究，
+数据库优化
+NIO,RPC框架，
+JVM原理，调优
+CAP、Quorum、一致性Hash、Paxos
+熟悉系统底层开发接口，精通Java多线程，Socket通信编程
+向量时钟、paxos、NWR一致性分布式算法
+常用降级方案（消息中间消峰、梯度限流、最少关键数据）
+缓存(Redis/Memached))、消息(Kafka/RabbitMQ/ActiveMQ),
+RabitMQ/ActiveMQ, Kafka/Jafka，Hadoop/Hive
