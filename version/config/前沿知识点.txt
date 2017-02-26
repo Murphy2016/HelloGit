@@ -1,15 +1,18 @@
-¼Ü¹¹Ë¼Î¬
-ibatis£¬nosql£¬mongodb£¬
-JDKÔ´Âë£¬
+ï»¿æ¶æ„æ€ç»´
+ibatisï¼Œnosqlï¼Œmongodbï¼Œ
+JDKæºç ï¼Œ
 spring,
-»º´æ¡¢ÏûÏ¢¡¢´óÊı¾İ´æ´¢µÈÏà¹Ø¼¼Êõ£¬ÀıÈç£ºredis¡¢memcached¡¢zookeeper¡¢ActiveMQ¡¢dubbo¡¢elasticsearch¡¢mongodb¡¢hbaseµÈ£»
-ÓÅĞã¿ªÔ´Èí¼şÑĞ¾¿£¬
-Êı¾İ¿âÓÅ»¯
-NIO,RPC¿ò¼Ü£¬
-JVMÔ­Àí£¬µ÷ÓÅ
-CAP¡¢Quorum¡¢Ò»ÖÂĞÔHash¡¢Paxos
-ÊìÏ¤ÏµÍ³µ×²ã¿ª·¢½Ó¿Ú£¬¾«Í¨Java¶àÏß³Ì£¬SocketÍ¨ĞÅ±à³Ì
-ÏòÁ¿Ê±ÖÓ¡¢paxos¡¢NWRÒ»ÖÂĞÔ·Ö²¼Ê½Ëã·¨
-³£ÓÃ½µ¼¶·½°¸£¨ÏûÏ¢ÖĞ¼äÏû·å¡¢Ìİ¶ÈÏŞÁ÷¡¢×îÉÙ¹Ø¼üÊı¾İ£©
-»º´æ(Redis/Memached))¡¢ÏûÏ¢(Kafka/RabbitMQ/ActiveMQ),
-RabitMQ/ActiveMQ, Kafka/Jafka£¬Hadoop/Hive
+ç¼“å­˜ã€æ¶ˆæ¯ã€å¤§æ•°æ®å­˜å‚¨ç­‰ç›¸å…³æŠ€æœ¯ï¼Œä¾‹å¦‚ï¼šredisã€memcachedã€zookeeperã€ActiveMQã€dubboã€elasticsearchã€mongodbã€hbaseç­‰ï¼›
+ä¼˜ç§€å¼€æºè½¯ä»¶ç ”ç©¶ï¼Œ
+æ•°æ®åº“ä¼˜åŒ–
+NIO,RPCæ¡†æ¶ï¼Œ
+JVMåŸç†ï¼Œè°ƒä¼˜
+CAPã€Quorumã€ä¸€è‡´æ€§Hashã€Paxos
+ç†Ÿæ‚‰ç³»ç»Ÿåº•å±‚å¼€å‘æ¥å£ï¼Œç²¾é€šJavaå¤šçº¿ç¨‹ï¼ŒSocketé€šä¿¡ç¼–ç¨‹
+å‘é‡æ—¶é’Ÿã€paxosã€NWRä¸€è‡´æ€§åˆ†å¸ƒå¼ç®—æ³•
+å¸¸ç”¨é™çº§æ–¹æ¡ˆï¼ˆæ¶ˆæ¯ä¸­é—´æ¶ˆå³°ã€æ¢¯åº¦é™æµã€æœ€å°‘å…³é”®æ•°æ®ï¼‰
+ç¼“å­˜(Redis/Memached))ã€æ¶ˆæ¯(Kafka/RabbitMQ/ActiveMQ),
+RabitMQ/ActiveMQ, Kafka/Jafkaï¼ŒHadoop/Hive
+Maven, Gradle
+ç†Ÿæ‚‰å¸¸è§„çš„xmppç­‰é€šè®¯æ¡†æ¶ï¼Œç†Ÿæ‚‰activesyncç­‰åŒæ­¥åè®®
+javaåå°„,Jboss
