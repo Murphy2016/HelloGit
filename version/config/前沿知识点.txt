@@ -1,4 +1,4 @@
-﻿架构思维
+架构思维
 ibatis，nosql，mongodb，
 JDK源码，
 spring,
@@ -16,3 +16,14 @@ RabitMQ/ActiveMQ, Kafka/Jafka，Hadoop/Hive
 Maven, Gradle
 熟悉常规的xmpp等通讯框架，熟悉activesync等同步协议
 java反射,Jboss
+Scala,大数据（hadoop，spark，storm等）hbase，hive，kafka/storm/spark等流式数据处理平台
+反向代理，负载均衡
+Linux,shell,python,
+分布式存储（fastDFS、HDFS等）
+基于流式计算框架storm、swark、genfire、eswer（CEw）
+HttpClient，Jsoup
+Velocity
+常见Servlet容器（Tomcat/Resin等）
+github/gitlab, jenkins，docker
+Spark,Flink等大数据平台
+熟悉 MySQL 的应用开发、常见的性能调优和可扩展性设计，熟悉事务、锁、并发等机制；
